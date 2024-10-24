@@ -15,19 +15,20 @@ else
   mkdir -p /tmp/install/root
 fi
 
-if [ ! -d "/code/apt-archives" ]
-then
-  mkdir -p /code/apt-archives
-else
-  rm -rf /code/apt-archives
-  mkdir -p /code/apt-archives
-fi
+current_dir=$(pwd)
 
+if [ ! -d "$current_dir/apt-archives" ]
+then
+  mkdir -p "$current_dir/apt-archives"
+else
+  rm -rf "$current_dir/apt-archives"
+  mkdir -p "$current_dir/apt-archives"
+fi
 
 apt-get update && apt-get install -y -d -o=dir::cache=/tmp/install $* --reinstall --no-install-recommends
 
 for f in $(ls /tmp/install/archives/*.deb); do \
   echo "Preparing to unpack ${f##*/}"; \
   cd /tmp/install/archives; \
-  dpkg-deb -x ${f##*/} /code/apt-archives; \
+  dpkg-deb -x ${f##*/} $current_dir/apt-archives; \
 done;
