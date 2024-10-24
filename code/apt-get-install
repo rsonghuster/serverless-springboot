@@ -2,6 +2,8 @@
 
 set -e
 
+sed -i -e 's/deb.debian.org/mirrors.cloud.aliyuncs.com/g' -e 's/security.debian.org/mirrors.cloud.aliyuncs.com/g' /etc/apt/sources.list
+
 if [ ! -d "/tmp/install" ]
 then
   mkdir -p /tmp/install/root
