@@ -2,7 +2,10 @@
 
 set -e
 
-sed -i -e 's/deb.debian.org/mirrors.cloud.aliyuncs.com/g' -e 's/security.debian.org/mirrors.cloud.aliyuncs.com/g' /etc/apt/sources.list
+rm -rf /etc/apt/sources.list.d
+echo deb http://mirrors.cloud.aliyuncs.com/debian buster main > /etc/apt/sources.list
+echo deb http://mirrors.cloud.aliyuncs.com/debian-security buster/updates main >> /etc/apt/sources.list
+deb http://mirrors.cloud.aliyuncs.com/debian buster-updates main >> /etc/apt/sources.list
 
 if [ ! -d "/tmp/install" ]
 then
